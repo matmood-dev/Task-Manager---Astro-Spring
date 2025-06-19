@@ -1,0 +1,34 @@
+---
+import { useState } from 'react';
+
+let title = '';
+let description = '';
+let completed = false;
+
+async function handleSubmit(e) {
+  e.preventDefault();
+
+  await fetch('http://localhost:8080/api/tasks', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, description, completed })
+  });
+
+  // Redirect or reload after submit
+  window.location.reload();
+}
+---
+
+<form on:submit={handleSubmit}>
+  <h2>Add New Task</h2>
+  <input type="text" placeholder="Title" bind:value={title} required />
+  <br />
+  <input type="text" placeholder="Description" bind:value={description} required />
+  <br />
+  <label>
+    <input type="checkbox" bind:checked={completed} />
+    Completed
+  </label>
+  <br />
+  <button type="submit">Add Task</button>
+</form>

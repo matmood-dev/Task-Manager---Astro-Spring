@@ -1,0 +1,21 @@
+---
+import TaskForm from '../components/TaskForm.tsx';
+import TaskList from '../components/TaskList.tsx';
+const response = await fetch('http://localhost:8080/api/tasks');
+const tasks = await response.json();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>📝 Task Manager</title>
+  </head>
+  <body style="font-family: sans-serif;">
+    <h1 style="text-align: center; margin: 20px 0;">📝 Task Manager</h1>
+
+    <div style="max-width: 600px; margin: auto; padding: 20px;">
+      <TaskForm client:only="react" />
+      <TaskList tasks={tasks} client:only="react" />
+    </div>
+  </body>
+</html>
